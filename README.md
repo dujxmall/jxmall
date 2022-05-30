@@ -59,7 +59,7 @@ cnpm run build:prod //打包生产环境
 
 ### 沟通与交流
 本产品仍然存在许多不足之处，欢迎各位大佬提交bug以及建议
-![加入群聊二维码](vx_images/492274813247030.png)
+![加入群聊二维码](https://raw.githubusercontent.com/DynamicUniverse/jxmall/dev/files/wxqrcode.png)
 
 ### 特别鸣谢
 
