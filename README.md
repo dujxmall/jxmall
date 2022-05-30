@@ -41,7 +41,7 @@ db.php
 
 控制台php版本需要php8.0及以上
 supervior创建守护进程
-php /www/wwwroot/www.jxmall.com/yii queue/listen
+php /www/wwwroot/www.dujxmall.com/yii queue/listen
 ```
 
 
@@ -55,7 +55,7 @@ cnpm run build:prod //打包生产环境
 推荐使用宝塔面板安装
 
 ### 文档教程
-[安装教程](http://www.jxmall.com/)
+[安装教程](http://www.dujxmall.com/)
 
 ### 沟通与交流
 本产品仍然存在许多不足之处，欢迎各位大佬提交bug以及建议
