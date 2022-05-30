@@ -115,7 +115,7 @@ mongodb
               acid: "-1",
               multiid: "0",
               version: "1.0",
-              siteroot: "https://jxmall.sinbel.cn/web/index.php?r=",
+              siteroot: "https://www.dujxmall.cn/web/index.php?r=",
               design_method: "3"
             };
             e.exports = n;
