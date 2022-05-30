@@ -1,0 +1,17 @@
+{
+  "name": "upload_server",
+  "version": "1.0.0",
+  "description": "上传小程序微信代码",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^18.1.0",
+    "miniprogram-ci": "^1.8.18",
+    "nodemon": "^2.0.15"
+  }
+}

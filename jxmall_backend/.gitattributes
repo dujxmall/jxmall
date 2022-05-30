@@ -1,0 +1,11 @@
+.gitignore        export-ignore
+.gitattributes    export-ignore
+/test             export-ignore
+/config           export-ignore
+/runtime           export-ignore
+/sql       export-ignore
+/vendor       export-ignore
+Yii.php       export-ignore
+yii       export-ignore
+yii.bat       export-ignore
+yii.php       export-ignore

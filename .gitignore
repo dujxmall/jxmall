@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+/jxmall_backend/runtime/
+/jxmall_backend/.idea/
+
+/jxmall_app/.idea/
+/jxmall_backend/vendor/
+/jxmall_app/unpackage/
+
+/.idea/
+/jxmall_app/.hbuilderx/
+/jxmall_admin/.hbuilderx/
+/jxmall_admin/dist/
+/jxmall_admin/.idea/
+/jxmall_admin/node_modules/
+/jxmall_admin_permission/.hbuilderx/
+/jxmall_admin_permission/dist/
+/jxmall_admin_permission/.idea/
+/jxmall_admin_permission/node_modules/
+/jxmall_mini_upload/node_modules/
