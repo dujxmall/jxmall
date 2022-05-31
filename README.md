@@ -18,6 +18,14 @@
     jxmall_backend 服务端php项目
     
 ### 相关截图
+![登录](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/1.png)
+![2](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/2.png)
+
+![3](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/3.png)
+
+![4](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/4.png)
+
+![5](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/5.png)
 
 
 ### 部署安装
