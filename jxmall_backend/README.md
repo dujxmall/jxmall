@@ -84,6 +84,10 @@ features to your application.
     菜单icon尺寸统一128x128
 ------------
 
+提示 /usr/bin/env: ‘php\r’: No such file or directory
+------------
+     在站点目录下：vi yii -> :set fileformat=unix -> :wq
+------------
 mongodb
 ------------
    
@@ -115,7 +119,7 @@ mongodb
               acid: "-1",
               multiid: "0",
               version: "1.0",
-              siteroot: "https://www.dujxmall.cn/web/index.php?r=",
+              siteroot: "https://jxmall.sinbel.cn/web/index.php?r=",
               design_method: "3"
             };
             e.exports = n;
