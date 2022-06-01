@@ -18,14 +18,14 @@
     jxmall_backend 服务端php项目
     
 ### 相关截图
-![登录](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/1.png)
-![2](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/2.png)
+![登录](https://gitee.com/dujxmall/jxmall/raw/main/files/1.png)
+![2](https://gitee.com/dujxmall/jxmall/raw/main/files/2.png)
 
-![3](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/3.png)
+![3](https://gitee.com/dujxmall/jxmall/raw/main/files/3.png)
 
-![4](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/4.png)
+![4](https://gitee.com/dujxmall/jxmall/raw/main/files/4.png)
 
-![5](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/5.png)
+![5](https://gitee.com/dujxmall/jxmall/raw/main/files/5.png)
 
 
 ### 部署安装
@@ -67,7 +67,7 @@ cnpm run build:prod //打包生产环境
 
 ### 沟通与交流
 本产品仍然存在许多不足之处，欢迎各位大佬提交bug以及建议
-![加入群聊二维码](https://raw.githubusercontent.com/dujxmall/jxmall/dev/files/wxqrcode.png)
+![加入群聊二维码](https://gitee.com/dujxmall/jxmall/raw/main/files/wxqrcode.png)
 
 ### 特别鸣谢
 
