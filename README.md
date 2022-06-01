@@ -51,11 +51,16 @@ composer install
 ./yii migrate/auto
 相关配置可以参考Yii官网文档
 
+
+
 控制台php版本需要php8.0及以上
 supervior创建守护进程
 php 站点完整路径/yii queue/listen
 ```
-
+------------
+如果提示 /usr/bin/env: ‘php\r’: No such file or directory
+在站点目录下：vi yii -> :set fileformat=unix -> :wq
+------------
 
 后台vue项目
 需要安装node环境,使用淘宝镜像安装会快一点
