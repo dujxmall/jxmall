@@ -321,7 +321,7 @@ class OrderPayDataForm extends BaseModel
                     ->sum('d.num');
 
                 if ($total_stock <= $current_sales) {
-                    return ResponseHelper::send(ApiCode::CODE_FAIL, "商品：{$goods->name}已库存不足！");
+                    return ResponseHelper::send(ApiCode::CODE_FAIL, "商品：{$goods->name}已售罄！");
                 }
 
                 if ($goods && $goods->is_limit) {
@@ -366,7 +366,7 @@ class OrderPayDataForm extends BaseModel
                 ->andWhere(['o.status' => [0, 1]])
                 ->sum('d.num');
             if ($total_stock <= $current_sales) {
-                return ResponseHelper::send(ApiCode::CODE_FAIL, "商品：{$goods->name}已库存不足！");
+                return ResponseHelper::send(ApiCode::CODE_FAIL, "商品：{$goods->name}已售罄！");
             }
             if ($goods && $goods->is_limit) {
                 $limit_num = $goods->limit_num;

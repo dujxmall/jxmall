@@ -195,7 +195,7 @@ class OrderSubmitForm extends BaseModel
                     $stock = Goods::getStock($goods->id);
                     if (!$stock) {
                         $t->rollBack();
-                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，库存不足！111');
+                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，已售罄！');
                     }
                 }
 
@@ -203,7 +203,7 @@ class OrderSubmitForm extends BaseModel
                     $goods_attr = GoodsAttr::getOne($goods_item['goods_attr_id']);
                     if (!$goods_attr) {
                         $t->rollBack();
-                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，库存不足！');
+                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，已售罄！');
                     }
                     $detail->attr = $goods_attr->attr_list;
                     $stock = Goods::getStock($goods_attr->goods_id, $goods_attr->id);
@@ -216,7 +216,7 @@ class OrderSubmitForm extends BaseModel
                     } else {
                         //库存不足
                         $t->rollBack();
-                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，库存不足！');
+                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，已售罄！');
                     }
                 } else { //库存减少
                     if ($goods->stock >= $detail->num) {
@@ -227,7 +227,7 @@ class OrderSubmitForm extends BaseModel
                         ];
                     } else {
                         $t->rollBack();
-                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，库存不足！222');
+                        return ResponseHelper::send(ApiCode::CODE_FAIL, '商品：' . $goods->name . '，已售罄！');
                     }
                 }
                 if (!$goods->is_attr) {
