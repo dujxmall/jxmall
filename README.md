@@ -43,13 +43,17 @@ php需要开启redis mongodb扩展
 redis.php 
 db.php
 修改成自己相关参数
-配置完参数后 在站点目录执行composer install 若依赖包安装失败，请在微信群联系我们
+配置完参数后 在站点目录执行以下命令 若依赖包安装失败，请在微信群联系我们
+composer install
 
+安装完依赖后，并且配置好数据库信息，执行 
+
+./yii migrate/auto
 相关配置可以参考Yii官网文档
 
 控制台php版本需要php8.0及以上
 supervior创建守护进程
-php /www/wwwroot/www.dujxmall.com/yii queue/listen
+php 站点完整路径/yii queue/listen
 ```
 
 
