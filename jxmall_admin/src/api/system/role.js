@@ -5,7 +5,7 @@ export function listRole(query) {
 	return request({
 		url: '/admin/admin/roles',
 		method: 'get',
-		params: query
+		data: query
 	})
 }
 

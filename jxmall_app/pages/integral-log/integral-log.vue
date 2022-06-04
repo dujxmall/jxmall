@@ -5,7 +5,7 @@
 	<view style="padding-top: 10rpx;">
 	
 		<view v-if="list.length>0" v-for="item in list"
-			style="height: 110rpx;border-bottom: solid #F3F3F3 1rpx;background-color: #FFFFFF;padding: 20rpx;padding-top: 20rpx;padding-bottom: 5rpx;">
+			style="border-bottom: solid #F3F3F3 1rpx;background-color: #FFFFFF;padding: 20rpx;padding-top: 20rpx;padding-bottom: 5rpx;">
 			<view class="flex-row flex-x-between" style="">
 				<view style=" width:70%;">
 					<view
@@ -13,7 +13,8 @@
 						{{item.content}}
 					</view>
 				</view>
-				<view style="width: 30%;text-align: end;">
+				 
+				<view style="width:40%;text-align: end;display: flex;" class="flex-y-center flex-x-end">
 					<text style="color: #EB0909;padding: 0 10rpx;font-weight: bold;" v-if="item.type==1">
 						+{{item.integral}} </text>
 					<text style="color: #EB0909;padding: 0 10rpx;font-weight: bold;" v-if="item.type==0">

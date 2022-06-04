@@ -7,13 +7,13 @@
 			<view v-if="list.length>0" v-for="item in list"
 				style="border-bottom: solid #F3F3F3 1rpx;background-color: #FFFFFF;padding: 20rpx;padding-top: 20rpx;padding-bottom: 5rpx;">
 				<view class="flex-row flex-x-between" style="">
-					<view style=" width:70%;">
+					<view style=" width:60%;">
 						<view
 							style="font-size: 11pt;overflow: hidden;text-overflow: ellipsis;word-wrap: normal;word-break: break-all;white-space: nowrap;">
 							{{item.content}}
 						</view>
 					</view>
-					<view style="width: 30%;text-align: end;">
+					<view style="width:40%;text-align: end;display: flex;" class="flex-y-center flex-x-end">
 						<text style="color: #EB0909;padding: 0 10rpx;font-weight: bold;" v-if="item.type==1">
 							+{{item.money}} </text>
 						<text style="color: #EB0909;padding: 0 10rpx;font-weight: bold;" v-if="item.type==0">
