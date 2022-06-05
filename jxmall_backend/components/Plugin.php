@@ -20,7 +20,7 @@ class Plugin extends Component
     public $currentPlugin;
     public $plugins;
     private $list;
-
+    private $install_type = 0;
     /**
      * @Author: 动力宇宙 ganxiaohao
      * @Date: 2020-10-29
@@ -100,6 +100,52 @@ class Plugin extends Component
         return $list;
     }
 
+    public function install($name)
+    {
+        $plugin = $this->getPlugin($name);
+        try {
+            $this->saveData($plugin);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+        return true;
+    }
+
+    /**
+     * @param \app\plugins\Plugin $plugin
+     * @return bool
+     * @throws \Exception
+     */
+    private function saveData($plugin)
+    {
+        $pluginModel = PluginModel::findOne(['name' => $plugin->getName()]);
+        $versionFile = \Yii::$app->basePath . '/plugins/' . $plugin->getName() . '/version';
+        if (file_exists($versionFile)) {
+            $version = file_get_contents($versionFile);
+            if (!$version || !preg_match('/^\d*(\.\d*)*$/', $version)) {
+                $version = '0.0.0';
+            }
+        } else {
+            file_put_contents($versionFile, '0.0.0');
+            $version = '0.0.0';
+        }
+        if (!$pluginModel) {
+            $pluginModel = new PluginModel();
+        }
+        $pluginModel->name = $plugin->getName();
+        $pluginModel->label = $plugin->getLabel();
+        $pluginModel->version = $version;
+        $pluginModel->is_delete = 0;
+        $pluginModel->install_type = $this->install_type;
+        $pluginModel->description = $plugin->getDsc();
+        $pluginModel->logo = $plugin->getLogo();
+        $pluginModel->type = $plugin->getType();
+        //$pluginModel
+        if (!$pluginModel->save()) {
+            throw new \Exception('插件安装失败: ' . (new BaseModel())->responseErrorMsg($pluginModel));
+        }
+        return true;
+    }
 
     public function getPlugin($name)
     {

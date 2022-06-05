@@ -69,7 +69,15 @@ cnpm run dev //开发
 cnpm run build:prod //打包生产环境
 
 
+
 推荐使用宝塔面板安装
+
+演示站点
+····
+地址：ceshi.dujxmall.com     用户名密码 ceshi  ceshi888
+
+····
+
 
 ### 文档教程(正在建设)
 [安装教程](http://www.dujxmall.com/)
