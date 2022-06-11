@@ -23,6 +23,10 @@
 					<tui-button @click="login" shape="circle" type="danger" width="550rpx" height="80rpx">立即登录
 					</tui-button>
 					<!-- #endif -->
+					<!-- #ifdef APP-PLUS -->
+					<tui-button @click="appLogin" shape="circle" type="danger" width="550rpx" height="80rpx">立即登录
+					</tui-button>
+					<!-- #endif -->
 				</view>
 				<view class="flex-y-center flex-x-between" style="padding: 0 100rpx;">
 					<view style="color: #B2B2B2;font-size: 9pt;padding-top: 40rpx;text-align: center;"
@@ -51,10 +55,12 @@
 					password: '',
 					openId: '',
 					openid: '',
+					unionId: '',
 				}
 			};
 		},
 		onLoad(options) {
+			uni.hideLoading();
 			let setting = uni.getStorageSync('MALL_SETTING');
 			if (setting) {
 				this.setting = setting;
@@ -83,6 +89,57 @@
 
 		},
 		methods: {
+			appLogin() {
+				let self = this;
+				if (this.is_loading) {
+					return;
+				}
+				if (this.form.mobile == '' || this.form.password == '') {
+					uni.showModal({
+						title: '提示',
+						content: '账号密码不正确',
+						showCancel: false
+					})
+					return;
+				}
+				if (!this.$util.isMobile(this.form.mobile)) {
+					uni.showModal({
+						title: '提示',
+						content: '手机号码格式不正确！',
+						showCancel: false
+					})
+					return;
+				}
+				this.is_loading = true;
+				uni.showLoading({
+					title: '正在登录...'
+				})
+				//app 授权登录
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+						// 获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: (infoRes) => {
+								if (infoRes.errMsg == 'getUserInfo:ok') {
+									let userInfo = infoRes.userInfo;
+									uni.setStorageSync('WECHAT_USER_INFO', userInfo);
+									self.login();
+								}
+							},
+							fail: (e) => {
+								this.is_loading = false;
+								self.$http.toast(res.msg);
+							}
+						});
+					},
+					fail: () => {
+						this.is_loading = false;
+						self.$http.toast(res.msg);
+					}
+				});
+			},
 			wxLogin(code) {
 				let self = this;
 				this.$request({
@@ -135,12 +192,15 @@
 				if (wechatInfo) {
 					this.form = Object.assign(this.form, wechatInfo);
 				}
-				this.form.openId = this.form.openid;
+				if (this.form.openid) {
+					this.form.openId = this.form.openid;
+				}
 				this.$request({
 					url: "/api/login/mobile",
 					data: this.form,
 					method: 'post',
 				}).then(res => {
+					uni.hideLoading();
 					this.is_loading = false;
 					if (res.code == 0) {
 						let user = res.data.user;

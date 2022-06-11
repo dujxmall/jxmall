@@ -8,6 +8,8 @@
 					<image v-if="setting" :src="setting.login_pic" mode="aspectFill"
 						style="width: 150rpx;height: 150rpx;border-radius: 10rpx;overflow: hidden;"></image>
 				</view>
+				<input v-model="form.pid" placeholder="推荐人ID(非必填)" maxlength="11" type="text" class="input-item"
+					style="margin-top: 50rpx;">
 				<input v-model="form.mobile" placeholder="请输入手机号" maxlength="11" type="text" class="input-item"
 					style="margin-top: 50rpx;">
 				<input placeholder="输入密码" v-model="form.password" type="password" class="input-item"
@@ -30,7 +32,10 @@
 					<tui-button shape="circle" type="danger" width="550rpx" height="80rpx" @click="signIn">立即注册
 					</tui-button>
 					<!-- #endif -->
-
+					<!-- #ifdef APP-PLUS -->
+					<tui-button shape="circle" type="danger" width="550rpx" height="80rpx" @click="authApp">立即注册
+					</tui-button>
+					<!-- #endif -->
 				</view>
 				<view style="color: #B2B2B2;font-size: 9pt;padding-top: 40rpx;text-align: center;" @click="$T.back(1)">
 					已有账号？点此登录
@@ -51,6 +56,7 @@
 				setting: null,
 				is_wechat: false,
 				form: {
+					pid: '',
 					mobile: '',
 					password: '',
 					code: '',
@@ -61,7 +67,8 @@
 					language: "",
 					nickName: "",
 					openid: "",
-					province: ""
+					province: "",
+					openId: '',
 				}
 			};
 		},
@@ -92,6 +99,11 @@
 				}).then(res => {
 					if (res.code === 0) {
 						uni.setStorageSync('WECHAT_USER_INFO', res.data.info);
+					} else {
+						uni.showModal({
+							title: '错误',
+							content: res.msg
+						})
 					}
 				});
 			},
@@ -175,11 +187,19 @@
 				if (wechatInfo) {
 					this.form = Object.assign(this.form, wechatInfo);
 				}
+				if (this.form.openId) {
+					this.form.openid = this.form.openId;
+				}
+
+				if (this.form.pid) {
+					this.$http.setPid(this.form.pid)
+				}
 				this.$request({
 					url: "/api/login/sign",
 					data: this.form,
 					method: 'post'
 				}).then(res => {
+					uni.hideLoading();
 					this.is_loading = false;
 					if (res.code == 0) {
 						uni.showModal({
@@ -192,6 +212,7 @@
 							}
 						})
 					} else {
+						uni.hideLoading();
 						this.is_loading = false;
 						uni.showModal({
 							title: '提示',
@@ -228,6 +249,9 @@
 					return;
 				}
 				let self = this;
+				uni.showLoading({
+					title: '正在注册'
+				})
 				uni.getUserProfile({
 					desc: '使用您的头像昵称信息',
 					success: (res) => {
@@ -274,7 +298,6 @@
 								})
 							},
 							complete: (e) => {
-								console.log(e);
 								this.$http.hideLoading();
 							},
 							fail: function(e) {
@@ -288,6 +311,64 @@
 					},
 					fail: (e) => {
 						console.log(e);
+					}
+				});
+			},
+
+			authApp() {
+				if (this.is_loading) {
+					return;
+				}
+				if (this.form.mobile == '' || this.form.password == '' || this.form.code == '') {
+					uni.showModal({
+						title: '提示',
+						content: '请先完善以上信息',
+						showCancel: false
+					})
+					return;
+				}
+				if (!this.$util.isMobile(this.form.mobile)) {
+					uni.showModal({
+						title: '提示',
+						content: '手机号码格式不正确！',
+						showCancel: false
+					})
+					return;
+				}
+				this.is_loading = true;
+				let wechatInfo = uni.getStorageSync('WECHAT_USER_INFO');
+				if (wechatInfo) {
+					this.signIn();
+					return;
+				}
+				let self = this;
+				uni.showLoading({
+					title: '正在注册'
+				})
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+						// 获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: (infoRes) => {
+								if (infoRes.errMsg == 'getUserInfo:ok') {
+									let userInfo = infoRes.userInfo;
+									uni.setStorageSync('WECHAT_USER_INFO', userInfo);
+									self.signIn();
+								}
+							},
+							fail: (e) => {
+								uni.hideLoading();
+								this.is_loading = false;
+								self.$http.toast(res.msg);
+							}
+						});
+					},
+					fail: () => {
+						uni.hideLoading();
+						this.is_loading = false;
+						self.$http.toast(res.msg);
 					}
 				});
 			},
