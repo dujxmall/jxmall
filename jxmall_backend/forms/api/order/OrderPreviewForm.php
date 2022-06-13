@@ -13,6 +13,7 @@ namespace app\forms\api\order;
 
 use app\core\ApiCode;
 use app\helpers\CacheHelper;
+use app\helpers\OptionHelper;
 use app\helpers\ResponseHelper;
 use app\helpers\SerializeHelper;
 use app\models\BaseModel;
@@ -52,6 +53,14 @@ class OrderPreviewForm extends BaseModel
     {
         if (!$this->validate()) {
             return $this->responseErrorInfo();
+        }
+        $mall_setting = OptionHelper::get('mall_setting', $this->mall_id);
+        if ($mall_setting) {
+            if (isset($mall_setting['is_must_parent_id']) && $mall_setting['is_must_parent_id'] == 1) {
+                if (\Yii::$app->user->identity->parent_id <= 0) {
+                    return ResponseHelper::send(ApiCode::CODE_FAIL, '需要绑定推荐人才可以下单');
+                }
+            }
         }
         $default_address = UserAddress::findOne(['is_default' => 1, 'user_id' => \Yii::$app->user->identity->id, 'is_delete' => 0]);
         $this->address = $default_address;
