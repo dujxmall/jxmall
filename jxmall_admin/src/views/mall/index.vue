@@ -94,6 +94,10 @@
 										</div>
 									</file-picker>
 								</el-form-item>
+								<el-form-item label="显示加入购物车按钮" size="normal">
+									<el-radio v-model="form.is_show_add_cart" label="0">否</el-radio>
+									<el-radio v-model="form.is_show_add_cart" label="1">是</el-radio>
+								</el-form-item>
 
 							</el-tab-pane>
 
@@ -137,6 +141,12 @@
 							</el-tab-pane>
 
 							<el-tab-pane label="交易设置" name="order">
+								<el-form-item label="下单必须绑定推荐人">
+									<el-radio-group v-model="form.is_must_parent_id">
+										<el-radio label="0">否</el-radio>
+										<el-radio label="1">是</el-radio>
+									</el-radio-group>
+								</el-form-item>
 								<el-form-item label="订单超时时长">
 									<el-input v-model="form.over_time">
 										<template slot="append">
@@ -244,7 +254,9 @@
 			return {
 				activeName: 'mall',
 				form: {
-					is_ban_cancel:'0',
+					is_must_parent_id:'0',
+					is_ban_cancel: '0',
+					is_show_add_cart: '0',
 					address: '',
 					lat: '',
 					lon: '',
@@ -317,9 +329,9 @@
 			back(row) {
 				this.$go.back()
 			},
-	
+
+		}
 	}
-}
 </script>
 
 

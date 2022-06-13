@@ -273,8 +273,9 @@ export default {
 					this.$message.success(res.msg);
 					this.$go.back();
 				}
+			}).catch(e => {
+				this.is_loading = false;
 			})
-
 		},
 
 		deleteIcon() {

@@ -1,9 +1,9 @@
 <template>
 	<view class="tui-pro-item" @click="$T.go('/pages/goods/goods?id='+goods.id)">
 		<image :src="goods.cover_pic" class="tui-pro-img"
-			mode="scaleToFill" />
+			mode="aspectFill" />
 		<view class="tui-pro-content">
-			<view class="tui-pro-tit">{{ goods.name }}</view>
+			<view class="tui-pro-tit" style="height: 68rpx;">{{ goods.name }}</view>
 			<view>
 				<view class="tui-pro-price" v-if="goods.is_negotiable==0">
 					<view class="tui-sale-price">￥{{ goods.price }}</view>

@@ -8,7 +8,7 @@
 					v-for="(goods,index) in value.list">
 					<view style="padding-bottom: 5rpx;">
 						<view class="good-img-box" :style="goodsHeight">
-							<image :src="goods.cover_pic" mode="scaleToFill" class="img"></image>
+							<image :src="goods.cover_pic" mode="aspectFill" class="img"></image>
 						</view>
 						<view>
 							<text class="title">
@@ -50,7 +50,7 @@
 					v-for="(goods,index) in value.list" style="width: 100%;margin-bottom: 10rpx;">
 					<view class="flex-row flex-x-center">
 						<view class="goods-img-box">
-							<image :src="goods.cover_pic" mode="scaleToFill" class="img" style="width: 300rpx;"
+							<image :src="goods.cover_pic" mode="aspectFill" class="img" style="width: 300rpx;"
 								:style="goodsHeight"></image>
 						</view>
 						<view
@@ -99,9 +99,10 @@
 			<view v-if="value.columns==1">
 				<view class="good-box-item" @click="pageTo(goods)" v-if="value.list.length>0"
 					v-for="(goods,index) in value.list"
-					style="width:100%;background-color: #FFFFFF;padding-bottom: 6rpx;"  :style="{marginBottom:index<value.list.length-1?'10rpx':'0rpx'}">
+					style="width:100%;background-color: #FFFFFF;padding-bottom: 6rpx;"
+					:style="{marginBottom:index<value.list.length-1?'10rpx':'0rpx'}">
 					<view class="good-img-box" :style="goodsHeight">
-						<image :src="goods.cover_pic" mode="scaleToFill" class="img"></image>
+						<image :src="goods.cover_pic" mode="aspectFill" class="img"></image>
 					</view>
 					<view>
 						<text class="title">
@@ -145,7 +146,7 @@
 									style="width:100%;overflow: hidden;margin: 0 auto; margin-bottom: 3rpx;border-radius: 15rpx;background-color: #FFFFFF;">
 									<view style="box-sizing: border-box;position: relative;padding-bottom: 5rpx;">
 										<view class="good-img-box" :style="goodsHeight">
-											<image :src="goods.cover_pic" mode="scaleToFill" class="img"></image>
+											<image :src="goods.cover_pic" mode="aspectFill" class="img"></image>
 										</view>
 										<view>
 											<text class="title">
@@ -182,15 +183,15 @@
 
 						</block>
 
-						<block v-if="value.columns>2">
+						<template v-if="value.columns>2">
 							<uni-grid-item
 								style="overflow: hidden;box-sizing: border-box;text-align: center;margin-top: 2px;box-sizing: border-box;"
-								:style="{marginLeft:index>0?'3rpx':'0rpx'}">
+								:style="{padding:index==1?'0 4rpx':'0rpx'}">
 								<view class="good-box-item" @click="pageTo(goods)"
 									style="width:100%;overflow: hidden;margin: 0 auto; margin-bottom: 3rpx;border-radius: 15rpx;background-color: #FFFFFF;">
 									<view style="box-sizing: border-box;position: relative;padding-bottom: 5rpx;">
 										<view class="good-img-box" :style="goodsHeight">
-											<image :src="goods.cover_pic" mode="scaleToFill" class="img"></image>
+											<image :src="goods.cover_pic" mode="aspectFill" class="img"></image>
 										</view>
 										<view>
 											<text class="title">
@@ -225,7 +226,7 @@
 								</view>
 							</uni-grid-item>
 
-						</block>
+						</template>
 
 					</block>
 
@@ -243,7 +244,7 @@
 				<view class="flex-row">
 					<view style="width: 25%;">
 						<view class="good-img-box" :style="goodsHeight" style="width: 100%;">
-							<image :src="goods.cover_pic" mode="scaleToFill" class="img"></image>
+							<image :src="goods.cover_pic" mode="aspectFill" class="img"></image>
 						</view>
 					</view>
 					<view style="width: 75%;">
